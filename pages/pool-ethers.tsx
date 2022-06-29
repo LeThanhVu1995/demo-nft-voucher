@@ -107,6 +107,7 @@ const PoolEthers: NextPage = () => {
       const wei = toWei(amount.toString());
       const data = { value: wei };
       const transaction = await contract.stakeEther(stakingLength, data);
+      setShowStakeModal(false);
       let tx = await transaction.wait();
       await loadAssets();
     } catch (err) {
@@ -174,8 +175,8 @@ const PoolEthers: NextPage = () => {
         </div>
 
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 ">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Assets
@@ -200,14 +201,8 @@ const PoolEthers: NextPage = () => {
             <tbody>
               {assets.map((asset: any, index: number) => {
                 return (
-                  <tr
-                    key={index}
-                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                  >
-                    <th
-                      scope="row"
-                      className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
-                    >
+                  <tr key={index} className="bg-white border-b ">
+                    <th scope="row" className="px-6 py-4 font-medium ">
                       ETH Pool
                     </th>
                     <td className="px-6 py-4">{asset.percentInterest} %</td>
@@ -219,7 +214,7 @@ const PoolEthers: NextPage = () => {
                         <a
                           onClick={() => withdraw(asset.positionId)}
                           href="#"
-                          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                          className="font-medium text-blue-600 "
                         >
                           Withdraw
                         </a>
@@ -242,11 +237,11 @@ const PoolEthers: NextPage = () => {
           className={`bg-[#00000033] overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full`}
         >
           <div className="relative p-4 w-full flex items-center justify-center h-full">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div className="relative bg-white rounded-lg shadow ">
               <button
                 onClick={() => setShowStakeModal(false)}
                 type="button"
-                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center "
                 data-modal-toggle="authentication-modal"
               >
                 <svg
@@ -263,12 +258,12 @@ const PoolEthers: NextPage = () => {
                 </svg>
               </button>
               <div className="py-6 px-6 lg:px-8">
-                <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                <h3 className="mb-4 text-xl font-medium text-gray-900 ">
                   Staking
                 </h3>
                 <form className="space-y-6" action="#">
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    <label className="block mb-2 text-sm font-medium text-gray-900 ">
                       Enter your ETH
                     </label>
                     <input
@@ -278,17 +273,17 @@ const PoolEthers: NextPage = () => {
                       onChange={(e) => {
                         setAmount(Number(e.target.value));
                       }}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                       required
                     />
                   </div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  <label className="block mb-2 text-sm font-medium text-gray-900 ">
                     {stakingLength} days @ {stakingPercent} APY
                   </label>
                   <button
                     type="button"
                     onClick={() => stakeEther()}
-                    className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                   >
                     Stake
                   </button>
